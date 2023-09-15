@@ -8,9 +8,7 @@ class ProductManager {
     this.path = 'datos.txt';
   }
   addProduct(title, description, price, thumbnail, code, stock) {
-    const productExistente = this.products.find(
-      (product) => product.code === code
-    );
+    const productExistente = this.products.find((product) => product.code === code);
     if (productExistente) {
       console.log("Error");
     } else {
@@ -23,18 +21,24 @@ class ProductManager {
         code,
         stock,
       };
-      //El null significa que no, se realizara ningún reemplazo especial durante la conversión
-      //El 2 es la cantidad de espacio sangría que se usara, para formatear la cadena de JSON
-      fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2)); //1.ARCHIVO(PARA QUE LO CREE, 2.Lo que yo quiero guardar)
+
+      fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2), "utf-8");
       this.products.push(newProduct); //push: agregando al array vacio
     }
   }
   getProducts = () => {
-    const products = fs.readFileSync(this.path, "utf-8");
-    return JSON.parse(products);
-    console.log(products);
+   // const products = fs.readFileSync(this.path, "utf-8");
+   // return JSON.parse(products);
+   // console.log(products);
+   try{
+    return JSON.parse(fs.readFileSync(this.path, "utf-8")) || [];
+   }catch(error){
+    return[];
+
+   }
   }
-  };
+ 
+
   getProductById = (id) => {
     const ExisteId = this.products.find((product) => product.id === id);
     if (fs.existsSync(this.path )) {
@@ -48,6 +52,8 @@ class ProductManager {
       console.log("Error");
     }
   };
+
+  //Borrar
   deleteProduct = () => {
     //fs.unlinkSync("datos.txt");//Eliminarlo
     fs.appendFileSync(this.path , " Más datos ");
@@ -55,13 +61,17 @@ class ProductManager {
     console.log(contenido);
     fs.unlinkSync("datos.txt");
   };
+  //Actualización
   updateProduct = () => {
     fs.appendFileSync(this.path, " Más datos ");
     contenido = fs.readFileSync(this.path, "utf-8");
     console.log(contenido);
   };
 
+  };
 
+  
+//-------------------------
 const productManager = new ProductManager();
 productManager.addProduct(
   "Anillo",
@@ -81,12 +91,12 @@ productManager.addProduct(
 );
 
 productManager.addProduct(
-  "Anillo de compromiso",
-  "Anillo de oro",
-  800000,
-  ".img/anillo1.jpg",
-  "ABBB003",
-  8
+  "Arete de oro",
+  "Anillo con forma",
+  500000,
+  ".img/arete.jpg",
+  "ABBB005",
+  7
 );
 console.log(productManager.getProducts());
-console.log(productManager.getProductById(1));
+//console.log(productManager.getProductById(1));
