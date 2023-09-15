@@ -23,7 +23,7 @@ class ProductManager {
         code,
         stock,
       };
-      fs.writeFileSync(this.path , data); //1.ARCHIVO(PARA QUE LO CREE, 2.Lo que yo quiero guardar)
+      fs.writeFileSync(this.path , fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))); //1.ARCHIVO(PARA QUE LO CREE, 2.Lo que yo quiero guardar)
       this.products.push(newProduct); //push: agregando al array vacio
     }
   }
@@ -34,7 +34,7 @@ class ProductManager {
     const ExisteId = this.products.find((product) => product.id === id);
     if (fs.existsSync(this.path )) {
       //metodo que me devuelve si existe o ni el archivo
-      let contenido = fs.readFileSync(this.path, "utf-8"); //2.codificaión de los caracteres
+      let contenido = fs.readFileSync(this.path , "utf-8"); //2.codificaión de los caracteres
       console.log(contenido);
     }
     if (ExisteId) {
@@ -48,7 +48,7 @@ class ProductManager {
     fs.appendFileSync(this.path , " Más datos ");
     contenido = fs.readFileSync(this.path, "utf-8");
     console.log(contenido);
-    fs.unlinkSync(this.path);
+    fs.unlinkSync("datos.txt");
   };
   updateProduct = () => {
     fs.appendFileSync(this.path, " Más datos ");
@@ -73,6 +73,15 @@ productManager.addProduct(
   ".img/2.jpg",
   "ABBB002",
   12
+);
+
+productManager.addProduct(
+  "Anillo de compromiso",
+  "Anillo de oro",
+  800000,
+  ".img/anillo1.jpg",
+  "ABBB003",
+  8
 );
 console.log(productManager.getProducts());
 console.log(productManager.getProductById(1));
