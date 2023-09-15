@@ -1,6 +1,6 @@
 //entrega 1
 const fs = require("fs"); //IMPORTAMOS LA LIBRERIA
-let data = "Hola mundo";
+//let data = "Hola mundo";
 class ProductManager {
   constructor() {
     this.products = []; //inicializo con array vacio
