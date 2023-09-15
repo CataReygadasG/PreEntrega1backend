@@ -23,12 +23,17 @@ class ProductManager {
         code,
         stock,
       };
-      fs.writeFileSync(this.path , fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2))); //1.ARCHIVO(PARA QUE LO CREE, 2.Lo que yo quiero guardar)
+      //El null significa que no, se realizara ningún reemplazo especial durante la conversión
+      //El 2 es la cantidad de espacio sangría que se usara, para formatear la cadena de JSON
+      fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2)); //1.ARCHIVO(PARA QUE LO CREE, 2.Lo que yo quiero guardar)
       this.products.push(newProduct); //push: agregando al array vacio
     }
   }
   getProducts = () => {
-    return this.products;
+    const products = fs.readFileSync(this.path, "utf-8");
+    return JSON.parse(products);
+    console.log(products);
+  }
   };
   getProductById = (id) => {
     const ExisteId = this.products.find((product) => product.id === id);
@@ -55,7 +60,7 @@ class ProductManager {
     contenido = fs.readFileSync(this.path, "utf-8");
     console.log(contenido);
   };
-}
+
 
 const productManager = new ProductManager();
 productManager.addProduct(

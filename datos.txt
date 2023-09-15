@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": 1,
+    "title": "Anillo",
+    "description": "Anillo de oro con brillante",
+    "price": 1200000,
+    "thumbnail": ".img/1.jpg",
+    "code": "ABBB001",
+    "stock": 12
+  },
+  {
+    "id": 2,
+    "title": "Anillo",
+    "description": "Anillo con brilllantes",
+    "price": 70000,
+    "thumbnail": ".img/2.jpg",
+    "code": "ABBB002",
+    "stock": 12
+  }
+]
