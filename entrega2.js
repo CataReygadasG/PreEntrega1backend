@@ -94,6 +94,6 @@ productManager.addProduct(
   "ABBB005",
   7
 );
-pro
+
 console.log(productManager.getProducts());
 console.log(productManager.getProductById(1));
