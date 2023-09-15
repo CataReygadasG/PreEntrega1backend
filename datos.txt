@@ -16,5 +16,14 @@
     "thumbnail": ".img/2.jpg",
     "code": "ABBB002",
     "stock": 12
+  },
+  {
+    "id": 3,
+    "title": "Arete de oro",
+    "description": "Anillo con forma",
+    "price": 500000,
+    "thumbnail": ".img/arete.jpg",
+    "code": "ABBB005",
+    "stock": 7
   }
 ]

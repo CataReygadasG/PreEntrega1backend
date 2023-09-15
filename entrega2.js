@@ -21,9 +21,8 @@ class ProductManager {
         code,
         stock,
       };
-
+      this.products.push(newProduct); //push: agregando al array vaci
       fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2), "utf-8");
-      this.products.push(newProduct); //push: agregando al array vacio
     }
   }
   getProducts = () => {
@@ -40,18 +39,15 @@ class ProductManager {
  
 
   getProductById = (id) => {
-    const ExisteId = this.products.find((product) => product.id === id);
-    if (fs.existsSync(this.path )) {
-      //metodo que me devuelve si existe o ni el archivo
-      let contenido = fs.readFileSync(this.path , "utf-8"); //2.codificaión de los caracteres
-      console.log(contenido);
-    }
+    const ExisteId = JSON.parse(fs.readFileSync(this.path, "utf-8")).find((product) => product.id === id);
     if (ExisteId) {
-      console.log(ExisteId);
+      return ExisteId;
     } else {
       console.log("Error");
     }
-  };
+    
+}
+
 
   //Borrar
   deleteProduct = () => {
@@ -98,5 +94,6 @@ productManager.addProduct(
   "ABBB005",
   7
 );
+pro
 console.log(productManager.getProducts());
-//console.log(productManager.getProductById(1));
+console.log(productManager.getProductById(1));
