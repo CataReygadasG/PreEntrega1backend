@@ -21,7 +21,7 @@ class ProductManager {
         code,
         stock,
       };
-      this.products.push(newProduct); //push: agregando al array vaci
+      this.products.push(newProduct); //push: agregando al array vacio
       fs.writeFileSync(this.path, JSON.stringify(this.products, null, 2), "utf-8");
     }
   }
@@ -50,18 +50,33 @@ class ProductManager {
 
 
   //Borrar
-  deleteProduct = () => {
-    fs.appendFileSync(this.path , this.products.id);
-    contenido = fs.readFileSync(this.path, "utf-8");
-    fs.unlinkSync("datos.txt");
-    console.log(contenido);
-   
-  };
+  deleteProduct = (id) => {
+    const newArray = JSON.parse(fs.readFileSync(this.path, "utf-8")).filter((item)=> item.id !== id);
+    if(newArray){
+      fs.unlinkSync(this.path);
+      newArray.sort((a, b)=> a.id - b.id);
+      fs.writeFileSync(this.path, JSON.stringify(newArray, null, 2));
+      return newArray;
+    }else{
+      console.log("Error no existe el id");
+    }
+    
+  }
   //Actualización, debe recibir el id del producto al actualizar
-  updateProduct = (id) => {
-    fs.appendFileSync(this.path, id);
-    contenido = fs.readFileSync(this.path, "utf-8");
-    console.log(contenido);
+  updateProduct = (id, update) => {
+    let products = JSON.parse(fs.readFileSync(this.path, "utf-8"));
+    const productoEncontrado = products.find(item => item.id === id);
+    if(productoEncontrado){
+      const productoActualizado = {
+        id:id,
+        ...update
+      };
+      const indiceProducto = products.indexOf(productoEncontrado);
+      products[indiceProducto] = productoActualizado;
+      fs.writeFileSync(this.path, JSON.stringify(products, null, 2));
+    }else{
+      console.log("error: no se contro producto con el id especifico");
+    }
   };
 
   };
@@ -95,5 +110,17 @@ productManager.addProduct(
   7
 );
 
-console.log(productManager.getProducts());
-console.log(productManager.getProductById(1));
+//console.log(productManager.getProducts());
+//console.log(productManager.getProductById(1));
+//console.log(productManager.deleteProduct(3));
+productManager.updateProduct(3,
+  {
+    title:"Arete de oro",
+    description: "Anillo con forma",
+    price:600000,
+    thumbnail: ".img/arete.jpg",
+    code:"ABBB005",
+    stock:9
+  }
+ 
+);
