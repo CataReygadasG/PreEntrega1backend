@@ -51,15 +51,15 @@ class ProductManager {
 
   //Borrar
   deleteProduct = () => {
-    //fs.unlinkSync("datos.txt");//Eliminarlo
-    fs.appendFileSync(this.path , " Más datos ");
+    fs.appendFileSync(this.path , this.products.id);
     contenido = fs.readFileSync(this.path, "utf-8");
-    console.log(contenido);
     fs.unlinkSync("datos.txt");
+    console.log(contenido);
+   
   };
-  //Actualización
-  updateProduct = () => {
-    fs.appendFileSync(this.path, " Más datos ");
+  //Actualización, debe recibir el id del producto al actualizar
+  updateProduct = (id) => {
+    fs.appendFileSync(this.path, id);
     contenido = fs.readFileSync(this.path, "utf-8");
     console.log(contenido);
   };
