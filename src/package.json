@@ -1,0 +1,21 @@
+{
+  "name": "proyecto_backend",
+  "version": "1.0.0",
+  "description": "proyecto de productos",
+  "main": "archivos.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Catalina Reygadas",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "moment": "^2.29.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "PreEntregabackend"
+  }
+}
